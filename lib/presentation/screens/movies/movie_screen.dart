@@ -1,4 +1,3 @@
-import 'package:cinemapedia/presentation/providers/storage/isar_favorite_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:animate_do/animate_do.dart';
