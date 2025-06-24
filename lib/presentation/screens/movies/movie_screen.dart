@@ -185,12 +185,6 @@ class _ActorsByMovie extends ConsumerWidget {
   }
 }
 
-// final isFavoriteProvider = StateNotifierProvider.family
-//     .autoDispose<FavoriteNotifier, bool, int>((ref, movieId) {
-//       final isarRepository = ref.watch(localStorageRepositoryProvider);
-//       return FavoriteNotifier(isarRepository, movieId);
-//     });
-
 final isFavoriteProvider = FutureProvider.family.autoDispose((
   ref,
   int movieId,
@@ -216,10 +210,6 @@ class _CustomSliverAppBar extends ConsumerWidget {
       actions: [
         IconButton(
           onPressed: () async {
-            // ref
-            //     .read(isFavoriteProvider(movie.id).notifier)
-            //     .toggleFavorite(movie);
-
             await ref
                 .read(favoriteMoviesProvider.notifier)
                 .toggleFavorite(movie);
