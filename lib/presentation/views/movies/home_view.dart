@@ -11,7 +11,8 @@ class HomeView extends ConsumerStatefulWidget {
   HomeViewState createState() => HomeViewState();
 }
 
-class HomeViewState extends ConsumerState<HomeView> {
+class HomeViewState extends ConsumerState<HomeView>
+    with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
@@ -24,12 +25,13 @@ class HomeViewState extends ConsumerState<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     final initialLoading = ref.watch(initialLoadingProvider);
     if (initialLoading) return const FullScreenLoader();
 
     final slideshowMovies = ref.watch(moviesSlideshowProvider);
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
-    final popularMovies = ref.watch(popularMoviesProvider);
     final upcomingMovies = ref.watch(upcomingMoviesProvider);
     final topRatedMovies = ref.watch(topRatedMoviesProvider);
 
@@ -68,14 +70,14 @@ class HomeViewState extends ConsumerState<HomeView> {
                       ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
                 ),
 
-                MovieHorizontalListview(
-                  movies: popularMovies,
-                  title: 'Populares',
-                  // subTitle: '',
-                  loadNextPage: () =>
-                      ref.read(popularMoviesProvider.notifier).loadNextPage(),
-                ),
-
+                //* Ya no estará aquí, ahora es parte del menú inferior
+                // MovieHorizontalListview(
+                //   movies: popularMovies,
+                //   title: 'Populares',
+                //   // subTitle: '',
+                //   loadNextPage: () =>
+                //       ref.read(popularMoviesProvider.notifier).loadNextPage(),
+                // ),
                 MovieHorizontalListview(
                   movies: topRatedMovies,
                   title: 'Mejor calificadas',
@@ -92,4 +94,7 @@ class HomeViewState extends ConsumerState<HomeView> {
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
